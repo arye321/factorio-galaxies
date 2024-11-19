@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxy Data Table</title>
+    <title>Factorio Galaxies</title>
     <!-- Include DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <!-- Include jQuery -->
@@ -12,7 +12,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <h1>Galaxy Data Table</h1>
+    <h1>Factorio Galaxies</h1>
     <table id="galaxyTable" class="display" style="width:100%">
         <thead>
             <tr>
@@ -27,7 +27,6 @@
 
     <script>
         $(document).ready(function () {
-            // Initialize the DataTable and fetch data from the JSON file
             $('#galaxyTable').DataTable({
                 ajax: 'data.json', // Path to the JSON file
                 columns: [
@@ -42,9 +41,24 @@
                         }
                     },
                     { data: 'id' }
-                ]
+                ],
+                order: [[1, 'asc']], // Sort by Creation Date
+                columnDefs: [
+                    {
+                        targets: [1, 2], // Creation Date and Update Date columns
+                        render: function(data, type, row) {
+                if (type === 'display' || type === 'filter') {
+                    // Example: Format the ISO date string for display purposes
+                    return new Date(data).toLocaleString();
+                }
+                return data; // Return raw data for sorting and internal use
+            }
+                    }
+                ],
+                
             });
         });
     </script>
+    
 </body>
 </html>
