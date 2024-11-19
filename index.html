@@ -34,7 +34,13 @@
                     { data: 'user' },
                     { data: 'creation_date' },
                     { data: 'update_date' },
-                    { data: 'galaxy_name' },
+                    {
+                        data: 'galaxy_name',
+                        render: function (data) {
+                            // Generate the clickable link
+                            return `<a href="https://factorio.com/galaxy/${encodeURIComponent(data)}" target="_blank">${data}</a>`;
+                        }
+                    },
                     { data: 'id' }
                 ]
             });
